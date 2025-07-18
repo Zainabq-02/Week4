@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Stylish To-Do List</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f2f0fb;
+      padding: 50px;
+      text-align: center;
+      color: #333;
+    }
+
+    h1 {
+      font-size: 36px;
+      color: #4b2f88;
+      margin-bottom: 10px;
+    }
+
+    p.description {
+      font-size: 18px;
+      color: #666;
+      margin-bottom: 30px;
+    }
+
+    input[type="text"] {
+      padding: 12px;
+      width: 300px;
+      font-size: 16px;
+      border: 2px solid #b5a5e3;
+      border-radius: 6px;
+      outline: none;
+    }
+    input[type="text"]:focus {
+      border-color: #7f5af0;
+    }
+
+    button {
+      padding: 12px 18px;
+      margin-left: 10px;
+      font-size: 16px;
+      background-color: #7f5af0;
+      border: none;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #6746cc;
+    }
+
+    ul {
+      margin-top: 40px;
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      background-color: #fff;
+      padding: 15px 20px;
+      margin: 10px auto;
+      width: 400px;
+      font-size: 18px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    li span.number {
+      color:  #333;
+      margin-right: 10px;
+    }
+
+    li button {
+      background-color: #D00000;
+      font-size: 14px;
+      padding: 6px 10px;
+    }
+    li button:hover {
+      background-color: #D00000;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Interactive To-Do List 📝</h1>
+  <p class="description">Add your daily tasks and stay organized with style!</p>
+
+  <input type="text" id="taskInput" placeholder="Enter a task here">
+  <button onclick="addTask()">Add Task</button>
+
+  <ul id="taskList"></ul>
+
+  <script>
+    let tasks = [];
+
+    function addTask() {
+      let input = document.getElementById("taskInput");
+      let task = input.value.trim();
+      if (task === "") {
+        alert("Please enter a task!");
+        return;
+      }
+      tasks.push(task);
+      displayTasks();
+      input.value = "";
+    }
+
+    function displayTasks() {
+      let list = document.getElementById("taskList");
+      list.innerHTML = "";
+
+      for (let i = 0; i < tasks.length; i++) {
+        list.innerHTML +=
+          "<li><span class='number'>" + (i + 1) + ".</span>" +
+          tasks[i] +
+          " <button onclick='deleteTask(" + i + ")'>Delete</button></li>";
+      }
+    }
+    function deleteTask(index) {
+      tasks.splice(index, 1);
+      displayTasks();
+    }
+  </script>
+</body>
+</html>
